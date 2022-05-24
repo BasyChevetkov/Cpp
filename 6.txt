@@ -1,0 +1,113 @@
+1)
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+int main() {
+	for (int count = 1; count <= pow(2, 8); count = count + 16) {
+
+		cout << " | " << setw(3) << count << "| ";
+		for (int count_2 = count; count_2 < count + 16; count_2++) {
+			char c = count_2;
+			cout << setw(2) << c << " | ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+	for (int count = 1; count <= pow(2, 9); count = count + 16) {
+		cout << " | " << setw(4) << count << "| ";
+		for (int count_2 = count; count_2 < count + 16; count_2++) {
+			wchar_t c = count_2;
+			wcout << setw(2) << c << " | ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+2)
+#include <iostream>
+#include <string>
+using namespace std;
+class expression
+{
+public:
+    double  a=0;
+    double b=0;
+    char operation='+';
+};
+expression convert(string s)
+{
+    expression y;
+    int j=0;
+    int error=0;
+    const int siz=s.size();
+    int r=siz-1;
+    char S[r];
+    for (int i = 0; i < siz; i++) {
+           if (s[i] == ':' or s[i] == '+' or s[i] == '-' or s[i] == '*')
+           {
+                   y.operation = s[i];
+                   S[j] = ' ';
+                   j++;
+                   continue;
+           };
+           if (isdigit(s[i]) or s[i]==' ')
+           {
+               S[j] = s[i];
+               j++;
+               continue;
+           }
+           cout << "ERROR: you entered the wrong character!" << endl;
+           error++;
+           break;
+    }
+    if (error==0)
+    {
+
+        char *ptr;
+        char *p;
+        y.a = strtod(S, &ptr);
+        p = ptr;
+        y.b = strtod(p, &ptr);
+    }
+    return y;
+}
+3)
+double solve()
+{
+    string s;
+    cout << "enter your expression:" << endl;
+    getline(cin,s);
+    expression x= convert(s);
+    switch (x.operation){
+        case '-':
+            cout  << x.a <<  " " << x.operation << " " << x.b<< " = " << x.a-x.b<<  endl;
+            break;
+        case '+':
+            cout  << x.a <<  " " << x.operation << " " << x.b<< " = " << x.a + x.b<<  endl;
+            break;
+        case '*':
+            cout  << x.a <<  " " << x.operation << " " << x.b<< " = " << x.a*x.b<<  endl;
+            break;
+        case ':':
+            if (x.b==0)
+            {
+                cout << "error: it is impossible to divide by zero!" << endl;
+            }
+            else
+            {
+                cout << x.a << " " << x.operation << " " << x.b << " = " << x.a / x.b << endl;
+            }
+            break;
+
+    }
+
+
+}
+
+int main()
+{
+     solve();
+}
